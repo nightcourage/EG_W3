@@ -16,10 +16,11 @@ public class Coin : MonoBehaviour
         transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        PlaneControl player = collision.gameObject.GetComponent<PlaneControl>();
-        if (player)
+        Debug.Log(other.name);
+        PlaneControl plane = other.GetComponentInParent<PlaneControl>();
+        if (plane)
         {
             DestroyCoin();
         }
@@ -27,7 +28,7 @@ public class Coin : MonoBehaviour
 
     private void DestroyCoin()
     {
-        GetComponentInParent<ObjectSpawner>().ObjectListUpdate(transform.gameObject);
         Destroy(gameObject);
+        GetComponentInParent<ObjectSpawner>().ObjectListUpdate(gameObject);
     }
 }

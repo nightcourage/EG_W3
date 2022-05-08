@@ -31,9 +31,9 @@ public class ObjectSpawner : MonoBehaviour
     private void Awake()
     {
         _terrainSize = _terrain.GetComponent<UnityEngine.Terrain>().terrainData.size;
-        GenerateObjects(_coin, _coinsList, 100, 100, 50);
+        GenerateObjects(_coin, _coinsList, 100, 90, 90);
         GenerateObjects(_bomb, _bombsList, 10, 100, 100);
-        GenerateObjects(_missleLauncher, _misslesList, 10, 150, 80);
+        GenerateObjects(_missleLauncher, _misslesList, 5, 150, 100);
     }
 
     private void GenerateObjects(GameObject objectToSpawn, List<GameObject> list, int startOffset, int increment, int endOffset)
@@ -58,5 +58,10 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
         Debug.Log(objectsCounter);
+    }
+
+    public int GetObjectsAmount()
+    {
+        return _coinsList.Count;
     }
 }

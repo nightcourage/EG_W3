@@ -26,27 +26,13 @@ public class PlaneControl : MonoBehaviour
         MoveForward(vertical, horizontal);
     }
 
-
-    private Vector3 FollowMouse()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 playerPosition = transform.position;
-
-        Vector3 direction = mousePosition - playerPosition;
-
-        return direction.normalized;
-    }
-    
     private void MoveForward(Vector3 up, Vector3 right)
     {
         float minSpeed = 1f;
         float maxSpeed = 100f;
         float speedControl = Mathf.Clamp(_planeDefaultSpeed * ControlAcceleration(), minSpeed, maxSpeed);
 
-        Vector3 resultVector = Vector3.forward + new Vector3(FollowMouse().x, FollowMouse().y);
-        Debug.Log(resultVector);
-        
-        _rigidbody.velocity = transform.TransformDirection(resultVector * speedControl);
+        _rigidbody.velocity = transform.TransformDirection(Vector3.forward * speedControl);
     }
 
     private float ControlAcceleration()
